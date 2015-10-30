@@ -32,7 +32,7 @@
 (deftheme noct)
 (let* ((class '((class color) (min-colors 89)))
        ;; Standard colors
-       (my-gray-darkest   "#333333")
+       (my-gray-darkest   "#444444")
        (my-gray-darker    "#555555")
        (my-gray-dark      "#777777")
        (my-gray           "#999999")
@@ -78,7 +78,13 @@
        (str     my-yellow)
        (type    my-blue-green)
        (var     my-blue)
-       (warning my-red))
+       (warning my-red)
+
+       ;; UI context aliases for colors
+       (text-inverse my-black)
+       (background-inverse my-gray-lighter)
+       (highlighted-background my-gray-darkest)
+       (text-muted my-gray))
 
   (custom-theme-set-variables
    'noct
@@ -106,7 +112,7 @@
    `(highlight ((,class (:foreground ,fg3 :background ,bg3))))
    `(hl-line ((,class (:background  ,bg2))))
    `(fringe ((,class (:background ,bg2 :foreground ,fg4))))
-   `(cursor ((,class (:background ,my-gray-lighter))))
+   `(cursor ((,class (:foreground ,text-inverse :background ,background-inverse))))
    `(show-paren-match-face ((,class (:background ,warning))))
 
    ;; iSearch
@@ -227,11 +233,14 @@
    `(rainbow-delimiters-depth-8-face ((,class :foreground ,var)))
    `(rainbow-delimiters-unmatched-face ((,class :foreground ,warning)))
 
+   ;; Rainbow-identifiers
+   `(rainbow-identifiers-identifier-1 ((,class (:foreground ,my-blue))))
+
    ;; Magit
    `(magit-item-highlight ((,class :background ,bg3)))
    `(magit-section-heading        ((,class (:foreground ,keyword :weight bold))))
    `(magit-hunk-heading           ((,class (:background ,bg3))))
-   `(magit-section-highlight      ((,class (:background ,bg2))))
+   `(section-highlight      ((,class (:background ,bg2))))
    `(magit-hunk-heading-highlight ((,class (:background ,my-gray-lighter :foreground ,my-black))))
    `(magit-diff-hunk-heading-highlight ((,class (:background ,my-gray-light :foreground ,my-black))))
    `(magit-diff-context-highlight ((,class (:background ,bg3 :foreground ,fg3))))
@@ -242,7 +251,7 @@
    `(magit-branch ((,class (:foreground ,const :weight bold))))
    `(magit-log-author ((,class (:foreground ,fg3))))
    `(magit-hash ((,class (:foreground ,fg2))))
-   `(magit-diff-file-header ((,class (:foreground ,fg2 :background ,bg3))))
+   `(magit-diff-file-header ((,class (:foreground ,text-inverse :background ,background-inverse))))
 
    `(lazy-highlight ((,class (:foreground ,fg2 :background ,bg3))))
 
@@ -259,9 +268,9 @@
 
    ;; Helm
    `(helm-header ((,class (:foreground ,fg2 :background ,bg1 :underline nil :box nil))))
-   `(helm-source-header ((,class (:foreground ,keyword :background ,bg1 :underline nil :weight bold))))
+   `(helm-source-header ((,class (:foreground ,my-orange :underline nil :weight bold))))
    `(helm-selection ((,class (:background ,bg2 :underline nil))))
-   `(helm-selection-line ((,class (:background ,bg2))))
+   `(helm-selection-line ((,class (:background ,highlighted-background))))
    `(helm-visible-mark ((,class (:foreground ,bg1 :background ,bg3))))
    `(helm-candidate-number ((,class (:foreground ,bg1 :background ,fg1))))
    `(helm-separator ((,class (:foreground ,type :background ,bg1))))
@@ -288,18 +297,18 @@
    `(helm-bookmark-w3m ((,class (:foreground ,type))))
 
    ;; Company
-   `(company-echo-common ((,class (:foreground ,bg1 :background ,fg1))))
-   `(company-preview ((,class (:background ,bg1 :foreground ,key2))))
-   `(company-preview-common ((,class (:foreground ,bg2 :foreground ,fg3))))
-   `(company-preview-search ((,class (:foreground ,type :background ,bg1))))
-   `(company-scrollbar-bg ((,class (:background ,bg3))))
-   `(company-scrollbar-fg ((,class (:foreground ,keyword))))
-   `(company-tooltip ((,class (:foreground ,fg2 :background ,bg1 :bold t))))
+   `(company-echo-common ((,class (:foreground ,my-red :background ,my-brown))))
+   `(company-preview ((,class (:foreground ,my-pink))))
+   `(company-preview-common ((,class (:foreground ,my-green))))
+   `(company-preview-search ((,class (:foreground ,type))))
+   `(company-scrollbar-bg ((,class ())))
+   `(company-scrollbar-fg ((,class ())))
+   `(company-tooltip ((,class (:foreground ,text-muted))))
    `(company-tooltop-annotation ((,class (:foreground ,const))))
-   `(company-tooltip-common ((,class ( :foreground ,fg3))))
-   `(company-tooltip-common-selection ((,class (:foreground ,str))))
+   `(company-tooltip-common ((,class (:foreground ,text-muted))))
+   `(company-tooltip-common-selection ((,class (:foreground ,text :weight normal :inherit nil))))
    `(company-tooltip-mouse ((,class (:inherit highlight))))
-   `(company-tooltip-selection ((,class (:background ,bg3 :foreground ,fg3))))
+   `(company-tooltip-selection ((,class ())))
    `(company-template-field ((,class (:inherit region))))
 
    ;; Web-mode
@@ -349,8 +358,8 @@
 
    ;; Phi-search
    `(phi-search-failpart-face ((t (:foreground ,my-red))))
-   `(phi-search-match-face ((t (:background ,my-blue-darker t))))
-   `(phi-search-selection-face ((t (:foreground ,my-black :background ,my-gray-lighter))))
+   `(phi-match-face ((t (:background ,my-blue-darker t))))
+   `(phi-search-selection-face ((t (:foreground ,text-inverse :background ,background-inverse))))
    ))
 
 (setq-default evil-insert-state-cursor '("#CCCCCC" (bar . 2)))
